@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import request from '@/utils/request';
+import { RequestParam } from '@/utils/commonTypes';
 import './index.scss';
 
 type LoginProps = {
@@ -12,11 +13,22 @@ const Login: React.FC<LoginProps> = (props) => {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
 
-  const login = () => {
-    axios.post('http://10.11.107.140:8080/login', {
+  const param: RequestParam = {
+    api: '/login',
+    method: 'post',
+    data: {
       username: account,
       password,
-    });
+    },
+  };
+
+  const login = async () => {
+    try {
+      const response = await request(param);
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

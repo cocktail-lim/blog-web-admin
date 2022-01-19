@@ -1,12 +1,19 @@
 .loginpage-content {
+  position: absolute;
+  height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-image: url('../../assets/homepage.jpg');
+  background-size: cover;
 
   .login-card {
     width: 450px;
     height: 500px;
-    box-shadow: 1px;
-    position: fixed;
-    right: 100px;
-    top: 50px;
+    box-shadow: 0px 0px 12px 5px rgba(0,0,0,0.1);
+    margin-right: 50px;
+    border-radius: 2px;
+    background-color: #ffffff;
   }
 }
