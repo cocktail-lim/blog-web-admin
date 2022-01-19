@@ -5,8 +5,10 @@ import './index.scss';
 const LoginPage: React.FC = () => {
   return (
     <div className='loginpage-content'>
-      <div className='login-card'>
-        <Login />
+      <div className='card-outline'>
+        <div className='login-card'>
+          <Login />
+        </div>
       </div>
     </div>
   );

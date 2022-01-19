@@ -1,16 +1,26 @@
 .login-main {
-  padding: 30px;
+  padding: 40px 50px;
   height: 100%;
+
+  .login-title {
+    font-size: 25px;
+  }
 
   .account-input {
     margin-bottom: 20px;
+    border-radius: 5px;
   }
 
   .password-input {
     margin-bottom: 20px;
+    border-radius: 5px;
   }
 
   .login-button {
     width: 100%;
+    height: 45px;
+    margin-top: 10px;
+    font-size: 20px;
+    border-radius: 15px;
   }
 }
