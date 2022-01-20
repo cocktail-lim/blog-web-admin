@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { login } from './login';
+import { userInfo } from './login';
+import { menuList } from './menu';
 
 export default function createReducer() {
   return combineReducers({
-    login,
+    userInfo,
+    menuList,
   });
 }

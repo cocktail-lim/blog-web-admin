@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from '../../types/login';
+import { LOGIN_SUCCESS } from '../types/login';
 
 export interface LoginStructure {
   uid: string;
