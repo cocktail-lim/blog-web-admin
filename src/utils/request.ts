@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { message } from 'antd';
 import { apiPath, defaultPort } from '@/apis/config';
-import { RequestParam } from './commonTypes';
+import type { RequestConfig } from './commonTypes';
 
 export interface RequestError {
   code: string;
@@ -17,7 +17,7 @@ const basicConfig = {
   },
 };
 
-const request = (config: RequestParam): Promise<any> => {
+const request = (config: RequestConfig<any>): Promise<any> => {
   const { api } = config;
   const flag: boolean = /^\//.test(api);
   const finalUrl: string = flag
