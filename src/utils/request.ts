@@ -8,6 +8,15 @@ export interface RequestError {
   message: string;
 }
 
+const basicConfig = {
+  timeout: 1000,
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': 'true',
+  },
+};
+
 const request = (config: RequestParam): Promise<any> => {
   const { api } = config;
   const flag: boolean = /^\//.test(api);
@@ -15,14 +24,8 @@ const request = (config: RequestParam): Promise<any> => {
     ? `${apiPath}:${defaultPort}${api}`
     : `${apiPath}:${defaultPort}/${api}`;
 
-  const headers = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true',
-  };
-
   return new Promise((resolve, reject) => {
-    axios({ ...config, url: finalUrl, headers })
+    axios({ ...basicConfig, ...config, url: finalUrl })
       .then((response) => {
         const {
           data: { data, code, message },
