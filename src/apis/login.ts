@@ -7,16 +7,18 @@ export interface LoginParam {
   password: string;
 }
 
+export interface UserInfo {
+  avatar: string;
+  intro: string;
+  isSilence: boolean;
+  nickname: string;
+  token: string;
+  userId: number;
+  username: string;
+}
+
 export interface LoginResponse {
-  userInfo: {
-    avatar: string;
-    intro: string;
-    isSilence: boolean;
-    nickname: string;
-    token: string;
-    userId: number;
-    username: string;
-  };
+  userInfo: UserInfo;
 }
 
 interface LoginRequestFunc {
@@ -26,15 +28,7 @@ interface LoginRequestFunc {
 const loginRequest: LoginRequestFunc = (
   config: RequestConfig<LoginParam>
 ): Promise<LoginResponse> => {
-  return new Promise((resolve, reject) => {
-    request(config)
-      .then((response: LoginResponse) => {
-        resolve(response);
-      })
-      .catch((e: RequestError) => {
-        reject && reject(e);
-      });
-  });
+  return request(config);
 };
 
 export { loginRequest };

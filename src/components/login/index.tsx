@@ -2,21 +2,24 @@ import React, { useState } from 'react';
 import { Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { loginRequest } from '@/apis/login';
-import type { LoginParam, LoginResponse } from '@/apis/login';
+import type { LoginParam, LoginResponse, UserInfo } from '@/apis/login';
 import type { RequestConfig } from '@/utils/commonTypes';
 import type { RequestError } from '@/utils/request';
 import './index.scss';
 
-type LoginProps = {
+interface LoginProps {
+  api: string;
+  loginSuccessCallback: (userInfo: UserInfo) => void;
   backUrl?: string;
-};
+}
 
-const Login: React.FC<LoginProps> = (props) => {
+const Login: React.FC<LoginProps> = (props: LoginProps) => {
+  const { api, backUrl, loginSuccessCallback } = props;
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
 
   const param: RequestConfig<LoginParam> = {
-    api: '/login',
+    api,
     method: 'post',
     data: {
       username: account,
@@ -27,6 +30,7 @@ const Login: React.FC<LoginProps> = (props) => {
   const login = async () => {
     try {
       const response: LoginResponse = await loginRequest(param);
+      loginSuccessCallback(response.userInfo);
     } catch (e) {
       const err = e as RequestError;
       message.error(err.message);
