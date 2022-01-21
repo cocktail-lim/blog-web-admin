@@ -2,7 +2,6 @@ import { UPDATE_MENU } from '../types/menu';
 
 export interface MenuStructure {
   title: string;
-  hidden: boolean;
   children: Omit<MenuStructure, 'children'>[];
 }
 

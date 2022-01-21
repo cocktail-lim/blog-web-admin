@@ -46,19 +46,13 @@ const MainPage: React.FC<MenuProps> = (props: MenuProps) => {
       <Layout>
         <Sider>
           <Menu>
-            {menuList.map(
-              (listItem, index) =>
-                !listItem.hidden && (
-                  <SubMenu key={`sub${index + 1}`} title={listItem.title}>
-                    {listItem.children.map(
-                      (childItem, childIndex) =>
-                        !childItem.hidden && (
-                          <Menu.Item key={`child${childIndex}`}>{childItem.title}</Menu.Item>
-                        )
-                    )}
-                  </SubMenu>
-                )
-            )}
+            {menuList.map((listItem, index) => (
+              <SubMenu key={`sub${index + 1}`} title={listItem.title}>
+                {listItem.children.map((childItem, childIndex) => (
+                  <Menu.Item key={`child${childIndex}`}>{childItem.title}</Menu.Item>
+                ))}
+              </SubMenu>
+            ))}
           </Menu>
         </Sider>
       </Layout>

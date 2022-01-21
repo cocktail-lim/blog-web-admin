@@ -3,7 +3,12 @@ import { message } from 'antd';
 import { apiPath, defaultPort } from '@/apis/config';
 import { RequestParam } from './commonTypes';
 
-const request = (config: RequestParam) => {
+export interface RequestError {
+  code: string;
+  message: string;
+}
+
+const request = (config: RequestParam): Promise<any> => {
   const { api } = config;
   const flag: boolean = /^\//.test(api);
   const finalUrl: string = flag
@@ -20,12 +25,13 @@ const request = (config: RequestParam) => {
     axios({ ...config, url: finalUrl, headers })
       .then((response) => {
         const {
-          data: { param, code },
+          data: { data, code, message },
         } = response;
-        if (code === 200) {
-          resolve(param);
+        if (code === '200') {
+          resolve(data);
         } else {
-          reject && reject(code);
+          const err: RequestError = { code, message };
+          reject && reject(err);
         }
       })
       .catch((e) => {

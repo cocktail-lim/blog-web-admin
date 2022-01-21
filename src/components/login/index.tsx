@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import request from '@/utils/request';
 import { RequestParam } from '@/utils/commonTypes';
+import type { RequestError } from '@/utils/request';
 import './index.scss';
 
 type LoginProps = {
@@ -27,7 +28,8 @@ const Login: React.FC<LoginProps> = (props) => {
       const response = await request(param);
       console.log(response);
     } catch (e) {
-      console.log(e);
+      const err = e as RequestError;
+      message.error(err.message);
     }
   };
 
