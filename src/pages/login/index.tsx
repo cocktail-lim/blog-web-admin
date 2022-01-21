@@ -1,15 +1,14 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import Login from '@/components/login/index';
 import { loginRes } from '@/store/actions/login';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import type { UserInfo } from '@/apis/login';
-import type { RootState, AppDispatch } from '@/store/store';
 import './index.scss';
 
 const LoginPage: React.FC = () => {
-  const userInfo = useSelector((state: RootState) => state.userInfo);
+  const userInfo = useAppSelector((state) => state.userInfo);
   const loginCallback = (userInfo: UserInfo) => {
-    const dispatch: AppDispatch = useDispatch();
+    const dispatch = useAppDispatch();
     dispatch(loginRes(userInfo));
   };
 
