@@ -13,7 +13,6 @@ const inititalState: UserInfo = {
   nickname: '',
   token: '',
   userId: -1,
-  username: '',
 };
 
 export const userInfo = (state: UserInfo = inititalState, action: Action) => {
