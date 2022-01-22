@@ -3,3 +3,7 @@ export interface RequestConfig<T> {
   method?: 'post' | 'get';
   data?: T;
 }
+
+export interface RequestFunc<Request, Response> {
+  (config: RequestConfig<Request>): Promise<Response>;
+}

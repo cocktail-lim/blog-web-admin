@@ -2,7 +2,7 @@ import React from 'react';
 import Login from '@/components/login/index';
 import { loginRes } from '@/store/actions/login';
 import { useAppDispatch } from '@/hooks/redux';
-import type { UserInfo } from '@/apis/login';
+import type { UserInfo } from '@/store/actions/login';
 import './index.scss';
 import { useNavigate } from 'react-router-dom';
 

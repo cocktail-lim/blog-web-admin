@@ -1,33 +1,18 @@
 import request from '@/utils/request';
-import type { RequestConfig } from '@/utils/commonTypes';
+import type { RequestConfig, RequestFunc } from '@/utils/commonTypes';
+import type { UserInfo } from '@/store/actions/login';
 
 export interface LoginParam {
   username: string;
   password: string;
 }
 
-export interface UserInfo {
-  avatar: string;
-  intro: string;
-  isSilence: boolean;
-  nickname: string;
-  token: string;
-  userId: number;
-  username: string;
-}
-
 export interface LoginResponse {
   userInfo: UserInfo;
 }
 
-interface LoginRequestFunc {
-  (config: RequestConfig<LoginParam>): Promise<LoginResponse>;
-}
-
-const loginRequest: LoginRequestFunc = (
+export const loginRequest: RequestFunc<LoginParam, LoginResponse> = (
   config: RequestConfig<LoginParam>
 ): Promise<LoginResponse> => {
   return request(config);
 };
-
-export { loginRequest };
