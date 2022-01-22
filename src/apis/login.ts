@@ -1,5 +1,4 @@
 import request from '@/utils/request';
-import type { RequestError } from '@/utils/request';
 import type { RequestConfig } from '@/utils/commonTypes';
 
 export interface LoginParam {

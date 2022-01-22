@@ -1,43 +1,26 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '@/hooks/redux';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import request from '@/utils/request';
 import { updateMenu } from '@/store/actions/menu';
 import type { MenuStructure } from '@/store/actions/menu';
 import { Dispatch } from 'redux';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-interface MenuProps {
-  menuList: MenuStructure[];
-  onUpdateMenu: any;
-}
-
-const mapStateToProps = (state: any) => {
-  return {
-    menuList: state.menuList,
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    onUpdateMenu: (list: MenuStructure[]) => {
-      dispatch(updateMenu(list));
-    },
-  };
-};
-
-const MainPage: React.FC<MenuProps> = (props: MenuProps) => {
-  const { menuList = [], onUpdateMenu } = props;
+const MainPage: React.FC = (props) => {
+  const menuList = useAppSelector((state) => state.menuList);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     setTimeout(() => {
-      onUpdateMenu([
-        {
-          title: 'test',
-          hidden: false,
-          children: [],
-        },
-      ]);
+      dispatch(
+        updateMenu([
+          {
+            title: 'test',
+            children: [],
+          },
+        ])
+      );
     }, 3000);
   }, []);
 
@@ -60,4 +43,4 @@ const MainPage: React.FC<MenuProps> = (props: MenuProps) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default MainPage;

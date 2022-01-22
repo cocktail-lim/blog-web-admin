@@ -10,13 +10,13 @@ import './index.scss';
 interface LoginProps {
   api: string;
   loginSuccessCallback: (userInfo: UserInfo) => void;
-  backUrl?: string;
 }
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
-  const { api, backUrl, loginSuccessCallback } = props;
+  const { api, loginSuccessCallback } = props;
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const param: RequestConfig<LoginParam> = {
     api,
@@ -28,10 +28,13 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   };
 
   const login = async () => {
+    setLoading(true);
     try {
       const response: LoginResponse = await loginRequest(param);
+      setLoading(false);
       loginSuccessCallback(response.userInfo);
     } catch (e) {
+      setLoading(false);
       const err = e as RequestError;
       message.error(err.message);
     }
@@ -55,7 +58,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
         prefix={<LockOutlined />}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button className='login-button' type='primary' onClick={login}>
+      <Button className='login-button' type='primary' onClick={login} loading={loading}>
         Login
       </Button>
     </div>

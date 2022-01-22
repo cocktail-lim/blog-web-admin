@@ -4,6 +4,6 @@ import { UserInfo } from '@/apis/login';
 export const loginRes = (userInfo: UserInfo) => {
   return {
     type: LOGIN_SUCCESS,
-    param: userInfo,
+    userInfo,
   };
 };

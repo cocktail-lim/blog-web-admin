@@ -1,19 +1,25 @@
 import { LOGIN_SUCCESS } from '../types/login';
-import type { LoginStructure } from '../actions/login';
+import type { UserInfo } from '@/apis/login';
 
 interface Action {
   type: string;
-  param: LoginStructure;
+  userInfo: UserInfo;
 }
 
 const inititalState = {
-  uid: '',
+  avatar: '',
+  intro: '',
+  isSilence: true,
+  nickname: '',
+  token: '',
+  userId: -1,
+  username: '',
 };
 
-export const userInfo = (state = inititalState, action: Action) => {
+export const userInfo = (state: UserInfo = inititalState, action: Action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return action.param.uid;
+      return action.userInfo;
     default:
       return state;
   }

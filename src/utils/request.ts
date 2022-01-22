@@ -9,7 +9,7 @@ export interface RequestError {
 }
 
 const basicConfig = {
-  timeout: 1000,
+  timeout: 10000,
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
     'Access-Control-Allow-Origin': '*',

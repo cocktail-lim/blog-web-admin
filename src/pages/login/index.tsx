@@ -1,15 +1,18 @@
 import React from 'react';
 import Login from '@/components/login/index';
 import { loginRes } from '@/store/actions/login';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { useAppDispatch } from '@/hooks/redux';
 import type { UserInfo } from '@/apis/login';
 import './index.scss';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
-  const userInfo = useAppSelector((state) => state.userInfo);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const loginCallback = (userInfo: UserInfo) => {
-    const dispatch = useAppDispatch();
     dispatch(loginRes(userInfo));
+    navigate('/');
   };
 
   return (
