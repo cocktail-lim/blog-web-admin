@@ -9,7 +9,6 @@ interface UpdateMenuAction {
 const initialState: MenuStructure[] = [
   {
     title: '首页',
-    hidden: false,
     children: [],
   },
 ];

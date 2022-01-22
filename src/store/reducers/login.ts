@@ -6,7 +6,7 @@ interface Action {
   userInfo: UserInfo;
 }
 
-const inititalState = {
+const inititalState: UserInfo = {
   avatar: '',
   intro: '',
   isSilence: true,
