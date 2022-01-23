@@ -41,7 +41,11 @@
     "vite-plugin-compression": "^0.4.0"
   },
   "lint-staged": {
-    "**/*.{js,ts,tsx}": ["eslint --fix", "prettier --config .prettierrc.js --write"],
-    "**/*.{css,scss}": "stylelint --fix"
+    "**/*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --config .prettierrc.js --write"
+    ],
+    "**/*.css": "stylelint --fix",
+    "**/*.scss": "stylelint --fix syntax=scss"
   }
 }
