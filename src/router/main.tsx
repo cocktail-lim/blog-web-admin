@@ -5,18 +5,23 @@ import './main.css';
 
 const Main = React.lazy(() => import('@/pages/main'));
 const Login = React.lazy(() => import('@/pages/login'));
+const HomePage = React.lazy(() => import('@/pages/home/index'));
 
-function suspensFunc(elementNode: ReactElement): ReactElement {
+export function suspensFunc(elementNode: ReactElement): ReactElement {
   return (
     <React.Suspense fallback={<Spin className='spin-loading' />}>{elementNode}</React.Suspense>
   );
 }
 
-const MainRouter: React.FC<ReactElement> = () => (
-  <Routes>
-    <Route path='/' element={suspensFunc(<Main />)} />
-    <Route path='/login' element={suspensFunc(<Login />)} />
-  </Routes>
-);
+const MainRouter: React.FC = () => {
+  return (
+    <Routes>
+      <Route path='/' element={suspensFunc(<Main />)}>
+        <Route path='home' element={suspensFunc(<HomePage />)} />
+      </Route>
+      <Route path='/login' element={suspensFunc(<Login />)} />
+    </Routes>
+  );
+};
 
 export default MainRouter;
