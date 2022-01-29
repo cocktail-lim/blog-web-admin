@@ -40,6 +40,7 @@ const MainPage: React.FC = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // 面包屑初始化
   const pathSnippets: string[] = location.pathname.split('/').filter((i) => i);
   const extraBreadcumbItems: ReactElement[] = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
@@ -55,13 +56,13 @@ const MainPage: React.FC = (props) => {
     </Breadcrumb.Item>,
   ].concat(extraBreadcumbItems);
 
+  // 面包屑路由跳转配置
   const goToPage = useCallback(
     (url: string): void => {
       navigate(url);
     },
     [navigate]
   );
-
   const getMenuItem = useCallback(
     (menuItem: MenuItemStructure): ReactElement => (
       <Menu.Item key={`menu-${menuItem.menuId}`} onClick={() => goToPage(menuItem.menuUrl)}>
