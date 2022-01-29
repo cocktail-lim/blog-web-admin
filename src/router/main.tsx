@@ -6,6 +6,7 @@ import './main.css';
 const Main = React.lazy(() => import('@/pages/main'));
 const Login = React.lazy(() => import('@/pages/login'));
 const HomePage = React.lazy(() => import('@/pages/home/index'));
+const UserList = React.lazy(() => import('@/pages/userList/index'));
 
 export function suspensFunc(elementNode: ReactElement): ReactElement {
   return (
@@ -18,6 +19,7 @@ const MainRouter: React.FC = () => {
     <Routes>
       <Route path='/' element={suspensFunc(<Main />)}>
         <Route path='home' element={suspensFunc(<HomePage />)} />
+        <Route path='userList' element={suspensFunc(<UserList />)} />
       </Route>
       <Route path='/login' element={suspensFunc(<Login />)} />
     </Routes>

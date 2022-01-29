@@ -3,6 +3,7 @@ interface BreadcrumbMapStructure {
 }
 const breadcrumbNameMap: BreadcrumbMapStructure = {
   '/home': 'Home',
+  '/userList': 'User List',
 };
 
 export default breadcrumbNameMap;

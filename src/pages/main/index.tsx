@@ -1,5 +1,5 @@
-import React, { useEffect, ReactElement } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useCallback, ReactElement } from 'react';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '@/hooks/redux';
 import { getMenuList } from '@/apis/menu';
 import type { MenuRequest, MenuReponse } from '@/apis/menu';
@@ -9,11 +9,10 @@ import type { MenuItemStructure } from '@/store/actions/menu';
 import type { RequestConfig } from '@/utils/commonTypes';
 import type { RequestError } from '@/utils/request';
 import breadCrumbNameMap from '@/router/breadCrumbMap';
-import { suspensFunc } from '@/router/main';
 
 import './index.scss';
 
-const { Sider, Header, Content } = Layout;
+const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 const MainPage: React.FC = (props) => {
@@ -39,6 +38,8 @@ const MainPage: React.FC = (props) => {
     getList();
   }, []);
   const location = useLocation();
+  const navigate = useNavigate();
+
   const pathSnippets: string[] = location.pathname.split('/').filter((i) => i);
   const extraBreadcumbItems: ReactElement[] = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
@@ -54,6 +55,22 @@ const MainPage: React.FC = (props) => {
     </Breadcrumb.Item>,
   ].concat(extraBreadcumbItems);
 
+  const goToPage = useCallback(
+    (url: string): void => {
+      navigate(url);
+    },
+    [navigate]
+  );
+
+  const getMenuItem = useCallback(
+    (menuItem: MenuItemStructure): ReactElement => (
+      <Menu.Item key={`menu-${menuItem.menuId}`} onClick={() => goToPage(menuItem.menuUrl)}>
+        {menuItem.menuName}
+      </Menu.Item>
+    ),
+    []
+  );
+
   return (
     <Layout className='main-content'>
       <Layout>
@@ -62,20 +79,18 @@ const MainPage: React.FC = (props) => {
             {menuList.map((listItem) =>
               listItem.children.length > 0 ? (
                 <SubMenu key={`sub${listItem.menuId}`} title={listItem.menuName}>
-                  {listItem.children?.map((childItem) => (
-                    <Menu.Item key={`child${childItem.menuId}`}>{childItem.menuName}</Menu.Item>
-                  ))}
+                  {listItem.children?.map((childItem) => getMenuItem(childItem))}
                 </SubMenu>
               ) : (
-                <Menu.Item key={`sub${listItem.menuId}`}>{listItem.menuName}</Menu.Item>
+                getMenuItem(listItem)
               )
             )}
           </Menu>
         </Sider>
         <Layout>
-          <Breadcrumb>{breadcrumbItems}</Breadcrumb>
-          {/* <Header>
-          </Header> */}
+          <div className='breadcrumb'>
+            <Breadcrumb>{breadcrumbItems}</Breadcrumb>
+          </div>
           <Content>
             <Outlet />
           </Content>
