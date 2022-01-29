@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
 
   const loginCallback = (userInfo: UserInfo) => {
     dispatch(loginRes(userInfo));
-    navigate('/');
+    navigate('/home');
   };
 
   return (

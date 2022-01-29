@@ -1,5 +1,5 @@
 import React, { useEffect, ReactElement } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '@/hooks/redux';
 import { getMenuList } from '@/apis/menu';
 import type { MenuRequest, MenuReponse } from '@/apis/menu';
@@ -22,7 +22,7 @@ const MainPage: React.FC = (props) => {
   useEffect(() => {
     async function getList(): Promise<void> {
       const config: RequestConfig<MenuRequest> = {
-        api: '/api/admin/menus',
+        api: '/api/admin/getMenus',
         method: 'get',
         params: {
           roleName: 'admin',
@@ -38,7 +38,7 @@ const MainPage: React.FC = (props) => {
     }
     getList();
   }, []);
-
+  const location = useLocation();
   const pathSnippets: string[] = location.pathname.split('/').filter((i) => i);
   const extraBreadcumbItems: ReactElement[] = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
@@ -49,7 +49,7 @@ const MainPage: React.FC = (props) => {
     );
   });
   const breadcrumbItems: ReactElement[] = [
-    <Breadcrumb.Item key='home'>
+    <Breadcrumb.Item key='/'>
       <Link to='/'>首页</Link>
     </Breadcrumb.Item>,
   ].concat(extraBreadcumbItems);
@@ -73,9 +73,9 @@ const MainPage: React.FC = (props) => {
           </Menu>
         </Sider>
         <Layout>
-          <Header>
-            <Breadcrumb>{breadcrumbItems}</Breadcrumb>
-          </Header>
+          <Breadcrumb>{breadcrumbItems}</Breadcrumb>
+          {/* <Header>
+          </Header> */}
           <Content>
             <Outlet />
           </Content>
