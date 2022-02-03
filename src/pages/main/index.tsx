@@ -75,7 +75,16 @@ const MainPage: React.FC = (props) => {
   return (
     <Layout className='main-content'>
       <Layout>
-        <Sider>
+        <Sider
+          style={{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            bottom: 0,
+          }}
+        >
           <Menu mode='inline' theme='dark'>
             {menuList.map((listItem) =>
               listItem.children.length > 0 ? (
@@ -88,7 +97,11 @@ const MainPage: React.FC = (props) => {
             )}
           </Menu>
         </Sider>
-        <Layout>
+        <Layout
+          style={{
+            marginLeft: 200,
+          }}
+        >
           <div className='breadcrumb'>
             <Breadcrumb>{breadcrumbItems}</Breadcrumb>
           </div>
