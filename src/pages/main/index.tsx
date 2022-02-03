@@ -103,7 +103,11 @@ const MainPage: React.FC = (props) => {
           <div className='breadcrumb'>
             <Breadcrumb>{breadcrumbItems}</Breadcrumb>
           </div>
-          <Content>
+          <Content
+            style={{
+              height: 'calc(100vh - 52px)',
+              padding: 20,
+            }}>
             <Outlet />
           </Content>
         </Layout>
