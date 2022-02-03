@@ -9,7 +9,7 @@ export interface UserListParam {
 }
 
 export interface UserItem {
-  id: number;
+  userId: number;
   avatar: string;
   roleName: string;
   nickname: string;
