@@ -83,8 +83,7 @@ const MainPage: React.FC = (props) => {
             left: 0,
             top: 0,
             bottom: 0,
-          }}
-        >
+          }}>
           <Menu mode='inline' theme='dark'>
             {menuList.map((listItem) =>
               listItem.children.length > 0 ? (
@@ -100,8 +99,7 @@ const MainPage: React.FC = (props) => {
         <Layout
           style={{
             marginLeft: 200,
-          }}
-        >
+          }}>
           <div className='breadcrumb'>
             <Breadcrumb>{breadcrumbItems}</Breadcrumb>
           </div>

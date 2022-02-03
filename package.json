@@ -43,10 +43,10 @@
   },
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
-      "eslint --fix",
-      "prettier --config .prettierrc.js --write"
+      "eslint",
+      "prettier --config .prettierrc.js"
     ],
-    "**/*.css": "stylelint --fix",
-    "**/*.scss": "stylelint --fix syntax=scss"
+    "**/*.css": "stylelint",
+    "**/*.scss": "stylelint syntax=scss"
   }
 }
