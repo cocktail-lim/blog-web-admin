@@ -20,6 +20,7 @@ const BlogList: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
   const [cur, setCur] = useState<number>(1);
   const [size, setSize] = useState<number>(5);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const changeArticleSticky = async (checked: boolean, item: ArticleItem) => {
     const config: RequestConfig<ArticleStickyParams> = {
       api: '/api/admin/article/topArticleById',
@@ -128,6 +129,7 @@ const BlogList: React.FC = () => {
       },
     };
     try {
+      setLoading(true);
       const response: ArticleListReponse = await getArticleList(config);
       const { articleList: newArticleList, total: newTotal } = response;
       setArticleList(newArticleList);
@@ -136,6 +138,7 @@ const BlogList: React.FC = () => {
       const err: RequestError = e as RequestError;
       message.error(err.message);
     }
+    setLoading(false);
   }, [cur, size]);
 
   useEffect(() => {
@@ -178,6 +181,7 @@ const BlogList: React.FC = () => {
         dataSource={articleList}
         rowKey='articleId'
         pagination={false}
+        loading={isLoading}
       />
       <Pagination
         className='table-pagination'
