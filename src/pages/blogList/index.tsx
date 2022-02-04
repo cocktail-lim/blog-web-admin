@@ -19,7 +19,7 @@ const BlogList: React.FC = () => {
   const searchInputRef = useRef<string>('');
   const [total, setTotal] = useState<number>(0);
   const [cur, setCur] = useState<number>(1);
-  const [size, setSize] = useState<number>(5);
+  const [size, setSize] = useState<number>(10);
   const [isLoading, setLoading] = useState<boolean>(true);
   const changeArticleSticky = async (checked: boolean, item: ArticleItem) => {
     const config: RequestConfig<ArticleStickyParams> = {
@@ -185,10 +185,10 @@ const BlogList: React.FC = () => {
       />
       <Pagination
         className='table-pagination'
-        showSizeChanger
-        pageSizeOptions={['5', '10', '50']}
+        // showSizeChanger
+        // pageSizeOptions={['5', '10', '50']}
         defaultCurrent={1}
-        defaultPageSize={5}
+        // defaultPageSize={5}
         current={cur}
         total={total}
         onChange={changePage}
