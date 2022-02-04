@@ -37,7 +37,7 @@ const BlogAdd: React.FC = () => {
     });
   }, []);
 
-  const articleEstablish = useCallback(async () => {
+  const articleEstablish = useCallback(async (): Promise<void> => {
     const articleCotent = vditorRef.current?.getValue();
     const config: RequestConfig<EstablishArticleParam> = {
       api: 'api/admin/article/saveOrUpdateArticle',
@@ -62,11 +62,11 @@ const BlogAdd: React.FC = () => {
     }
   }, []);
 
-  const handleChangeCategory: ChangeArticleCategory = (value: number) => {
+  const handleChangeCategory: ChangeArticleCategory = (value: number): void => {
     curCategory.current = value;
   };
 
-  const handleChangeTags: ChangeArticleTag = (value: number[]) => {
+  const handleChangeTags: ChangeArticleTag = (value: number[]): void => {
     curTags.current = value;
   };
 
@@ -78,16 +78,16 @@ const BlogAdd: React.FC = () => {
     curSticky.current = checked;
   };
 
-  const onEstablishArticle = (draftFlag: boolean) => {
+  const onEstablishArticle = (draftFlag: boolean): void => {
     isDraft.current = draftFlag;
     setModalVisible(true);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setModalVisible(false);
   };
 
-  const handleOk = () => {
+  const handleOk = (): void => {
     articleEstablish();
   };
 

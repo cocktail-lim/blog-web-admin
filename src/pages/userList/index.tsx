@@ -2,6 +2,7 @@ import React, { useEffect, useState, ReactElement } from 'react';
 import { message, Table, Tag, Button, Pagination } from 'antd';
 import { userListRequest } from '@/apis/user';
 import dayjs from 'dayjs';
+import PageHeader from '@/components/pageHeader';
 import type { UserItem } from '@/apis/user';
 import type { UserListParam, UserListResponse } from '@/apis/user';
 import type { RequestConfig } from '@/utils/commonTypes';
@@ -99,6 +100,7 @@ const UserList: React.FC = (props) => {
   };
   return (
     <div className='user-list-content'>
+      <PageHeader title='User List' />
       <Table<UserItem>
         columns={columns}
         dataSource={userList}

@@ -26,7 +26,7 @@ const EstablishModal: React.FC<EstablishProps> = (props) => {
   const [categoryOptions, setCategoryOptions] = useState<DefaultOptionType[]>([]);
 
   const getTags = useCallback(async (): Promise<void> => {
-    const config: RequestConfig<never> = {
+    const config: RequestConfig<void> = {
       api: '/api/admin/tag/getTag',
       method: 'get',
     };
@@ -41,7 +41,7 @@ const EstablishModal: React.FC<EstablishProps> = (props) => {
   }, [setTagList]);
 
   const getTypes = useCallback(async (): Promise<void> => {
-    const config: RequestConfig<never> = {
+    const config: RequestConfig<void> = {
       api: '/api/admin/category/getCategory',
       method: 'get',
     };

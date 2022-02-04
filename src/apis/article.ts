@@ -13,8 +13,8 @@ export interface TagListResponse {
   tagList: TagItem[];
 }
 
-export const getArticleTags: RequestFunc<never, TagListResponse> = (
-  config: RequestConfig<never>
+export const getArticleTags: RequestFunc<void, TagListResponse> = (
+  config: RequestConfig<void>
 ): Promise<TagListResponse> => {
   return request(config);
 };
@@ -31,8 +31,8 @@ export interface CategoryResponse {
   categoryList: CategoryItem[];
 }
 
-export const getArticleCategory: RequestFunc<never, CategoryResponse> = (
-  config: RequestConfig<never>
+export const getArticleCategory: RequestFunc<void, CategoryResponse> = (
+  config: RequestConfig<void>
 ): Promise<CategoryResponse> => {
   return request(config);
 };
@@ -46,10 +46,51 @@ export interface EstablishArticleParam {
   categoryId?: number;
   tagList?: number[];
   isTop?: boolean;
-  isDraft?: boolean;
+  isDraft: boolean;
 }
-export const establishArticle: RequestFunc<EstablishArticleParam, any> = (
+export const establishArticle: RequestFunc<EstablishArticleParam, void> = (
   config: RequestConfig<EstablishArticleParam>
-): Promise<any> => {
+): Promise<void> => {
+  return request(config);
+};
+
+//获取文章列表
+export interface ArticleListParams {
+  current: number;
+  size: number;
+  articleTitle?: string;
+}
+
+export interface ArticleItem {
+  articleId: number;
+  articleTitle: string;
+  categoryName: string;
+  createTime: string;
+  isDraft: boolean;
+  isTop: boolean;
+  tagList: string[];
+  updateTime: string;
+}
+export interface ArticleListReponse {
+  articleList: ArticleItem[];
+  total: number;
+}
+
+export const getArticleList: RequestFunc<ArticleListParams, ArticleListReponse> = (
+  config: RequestConfig<ArticleListParams>
+): Promise<ArticleListReponse> => {
+  return request(config);
+};
+
+// 修改置顶状态
+
+export interface ArticleStickyParams {
+  articleId: number;
+  isTop: boolean;
+}
+
+export const stickArticle: RequestFunc<ArticleStickyParams, void> = (
+  config: RequestConfig<ArticleStickyParams>
+): Promise<void> => {
   return request(config);
 };

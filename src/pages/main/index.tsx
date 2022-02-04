@@ -108,7 +108,9 @@ const MainPage: React.FC = (props) => {
               height: 'calc(100vh - 52px)',
               padding: 20,
             }}>
-            <Outlet />
+            <div className='content-box'>
+              <Outlet />
+            </div>
           </Content>
         </Layout>
       </Layout>
